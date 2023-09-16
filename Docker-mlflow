@@ -1,0 +1,18 @@
+# Base image with Python and MLflow
+FROM python:3.8
+
+# Set environment variables
+ENV FILE_DIR=/mlflow
+ENV MLFLOW_VERSION=2.4.2
+ENV AWS_BUCKET="t-test-bucket-v1"
+ENV PORT=5000
+ENV AWS_ACCESS_KEY_ID="AWS_ACCESS_KEY_ID"
+ENV AWS_SECRET_ACCESS_KEY="AWS_SECRET_ACCESS_KEY"
+
+RUN pip install mlflow==$MLFLOW_VERSION && \
+    pip install awscli --upgrade --user && \
+    pip install boto3==1.16.46
+
+COPY run.sh /
+
+ENTRYPOINT ["/run.sh"]

@@ -6,7 +6,9 @@ x-airflow-common:
     dockerfile: ./Dockerfile
   environment:
     &airflow-common-env
-    AWS_BUCKET: t-test-bucket-v1
+    AWS_ACCESS_KEY_ID: "AWS_ACCESS_KEY_ID"
+    AWS_SECRET_ACCESS_KEY: "AWS_SECRET_ACCESS_KEY"
+    AWS_BUCKET: "t-test-bucket-v1"
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     # For backward compatibility, with Airflow <2.3
@@ -32,6 +34,15 @@ x-airflow-common:
       condition: service_healthy
 
 services:
+  mlflow:
+    build:
+      context: .
+      dockerfile: ./Docker-mlflow
+    ports:
+      - 5000:5000
+    volumes:
+      - ./mlflow:/mlflow
+
   postgres:
     image: postgres:13
     environment:

@@ -1,3 +1,9 @@
 /data
 /logs
 /ibos
+*.db
+*.csv
+*.sys
+*.pkl
+*.meta
+*.pyc

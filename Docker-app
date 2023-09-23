@@ -1,0 +1,18 @@
+# start by pulling the python image
+FROM tiangolo/uwsgi-nginx-flask:python3.8
+
+# copy app
+COPY /app .
+
+# switch working directory & install python libs
+WORKDIR /app
+RUN pip install --upgrade pip
+RUN pip install -r requirement.txt
+
+# Set the environment variable for Flask to run in production mode
+ENV FLASK_ENV=production
+ENV AWS_ACCESS_KEY_ID=fPqbGwnrg7pdrSVgG21o
+ENV AWS_SECRET_ACCESS_KEY=zRF3ilidXASMsc5Cv9z8GUNh7XIpOkiqvMeE1XSO
+ENV AWS_BUCKET=t-test-bucket-v1
+# production environment
+ENV ENVIRONMENT=production

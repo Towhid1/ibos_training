@@ -238,6 +238,10 @@ MLFlow official doc: https://mlflow.org/docs/latest/index.html
    ```sh
    docker-compose --env-file config.env up --build
    ```
+5. Before running airflow pipeline we need to `create bucket` in minio. Bucket name need match `MLFLOW_BUCKET_NAME` env variable inside `config.env` file.
+6. Then we need to create access token in minio. And update `config.env` and `Docker-app` with new access key and ID.
+7. Then you can run airflow pipeline.
+   
 #### Evidently for data-drift monitoring
 1. Dag code updated
 2. requirement file updated
